@@ -428,13 +428,13 @@ export default function GoalRpgApp() {
                 <div className="border-t border-white/10 bg-black/20 p-6 md:border-l md:border-t-0 md:p-8">
                   <div className="mb-4 flex flex-wrap items-start gap-3">
                     <div className="flex shrink-0">
-                      <div className="relative flex h-[120px] w-[92px] shrink-0 items-end justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-100 to-slate-200/90 shadow-inner">
+                      <div className="relative h-[min(52vw,240px)] w-[min(40vw,180px)] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-100 to-slate-200/90 shadow-inner sm:h-[240px] sm:w-[180px]">
                         <Image
                           src={HERO_PROFILE_PORTRAIT}
                           alt=""
-                          width={184}
-                          height={240}
-                          className="h-[116px] w-auto max-w-[90%] object-contain object-bottom [image-rendering:pixelated]"
+                          fill
+                          sizes="(max-width: 640px) 52vw, 180px"
+                          className="object-cover object-bottom [image-rendering:pixelated]"
                           priority
                         />
                       </div>
