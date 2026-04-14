@@ -16,7 +16,6 @@ import { Sword, Sparkles, Star, Plus, Trash2, Crown, ScrollText, Zap, CheckCircl
 import { motion } from "framer-motion";
 import { AdventureBackdrop } from "@/components/rpg/AdventureBackdrop";
 import { BossBattleDialog } from "@/components/rpg/BossBattleDialog";
-import { PixelHeroTiered } from "@/components/rpg/PixelArt";
 import {
   ROADMAP_HORIZONS,
   emptyRoadmap,
@@ -27,8 +26,8 @@ import {
 import { getCharacterTier, nextTierBucket } from "@/lib/characterTiers";
 
 const STORAGE_KEY = "goal-rpg-app-v1";
-/** \u30af\u30a8\u30b9\u30c8\u9054\u6210 0\u20139%\uff08\u6751\u4eba\uff09\u3067\u8868\u793a\u3059\u308b\u7acb\u3061\u7d75\u30b9\u30d7\u30e9\u30a4\u30c8 */
-const HERO_INITIAL_PORTRAIT = "/characters/hero-initial.png";
+/** \u5192\u967a\u8005\u30d7\u30ed\u30d5\u30a3\u30fc\u30eb\u7acb\u3061\u7d75\uff08\u9054\u6210\u7387\u306b\u95a2\u4fc2\u306a\u304f\u3053\u306e\u753b\u50cf\u3092\u8868\u793a\uff09 */
+const HERO_PROFILE_PORTRAIT = "/characters/hero-initial.png";
 /** \u30af\u30a8\u30b9\u30c8\u9054\u6210\u7387\u304c\u3053\u306e\u5024\u4ee5\u4e0a\u3067\u9b54\u738b\u6226\u89e3\u653e */
 const BOSS_UNLOCK_PERCENT = 80;
 
@@ -429,22 +428,16 @@ export default function GoalRpgApp() {
                 <div className="border-t border-white/10 bg-black/20 p-6 md:border-l md:border-t-0 md:p-8">
                   <div className="mb-4 flex flex-wrap items-start gap-3">
                     <div className="flex shrink-0">
-                      {characterTier.tierStep === 0 ? (
-                        <div className="relative flex h-[120px] w-[92px] shrink-0 items-end justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-100 to-slate-200/90 shadow-inner">
-                          <Image
-                            src={HERO_INITIAL_PORTRAIT}
-                            alt=""
-                            width={184}
-                            height={240}
-                            className="h-[116px] w-auto max-w-[90%] object-contain object-bottom [image-rendering:pixelated]"
-                            priority
-                          />
-                        </div>
-                      ) : (
-                        <div className="flex h-[88px] w-[88px] shrink-0 items-end justify-center rounded-2xl border border-white/10 bg-slate-950/50 pb-1">
-                          <PixelHeroTiered tierStep={characterTier.tierStep} scale={4} />
-                        </div>
-                      )}
+                      <div className="relative flex h-[120px] w-[92px] shrink-0 items-end justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-100 to-slate-200/90 shadow-inner">
+                        <Image
+                          src={HERO_PROFILE_PORTRAIT}
+                          alt=""
+                          width={184}
+                          height={240}
+                          className="h-[116px] w-auto max-w-[90%] object-contain object-bottom [image-rendering:pixelated]"
+                          priority
+                        />
+                      </div>
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">
                       <div className="text-lg font-semibold">{player.name}</div>
