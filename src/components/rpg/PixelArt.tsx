@@ -98,24 +98,62 @@ function PixelSvg({
   );
 }
 
+/** \u5404\u6bb5\u968e\u3067\u8272\u304c\u91cd\u306a\u3089\u306a\u3044\u3088\u3046\u306b\uff08tier3 \u306f\u9285\u8272\u3001\u30d9\u30fc\u30b9\u306e\u9752\u3068\u540c\u8272\u306b\u3057\u306a\u3044\uff09 */
 const HERO_ARMOR_SWATCHES: Record<string, string>[] = [
   { "3": "#78716c", "4": "#44403c", "5": "#a8a29e", "6": "#57534e" },
-  { "3": "#64748b", "4": "#334155", "5": "#94a3b8", "6": "#475569" },
-  { "3": "#0369a1", "4": "#0c4a6e", "5": "#7dd3fc", "6": "#075985" },
-  { "3": "#2563eb", "4": "#1e3a8a", "5": "#93c5fd", "6": "#1d4ed8" },
-  { "3": "#4f46e5", "4": "#312e81", "5": "#c7d2fe", "6": "#4338ca" },
+  { "3": "#57534e", "4": "#292524", "5": "#d6d3d1", "6": "#44403c" },
+  { "3": "#0d9488", "4": "#115e59", "5": "#99f6e4", "6": "#0f766e" },
+  { "3": "#b45309", "4": "#78350f", "5": "#fdba74", "6": "#9a3412" },
+  { "3": "#3b82f6", "4": "#1d4ed8", "5": "#dbeafe", "6": "#2563eb" },
+  { "3": "#6d28d9", "4": "#4c1d95", "5": "#ddd6fe", "6": "#5b21b6" },
   { "3": "#ca8a04", "4": "#854d0e", "5": "#fde047", "6": "#a16207" },
-  { "3": "#eab308", "4": "#a16207", "5": "#fef08a", "6": "#ca8a04" },
-  { "3": "#e2e8f0", "4": "#64748b", "5": "#f8fafc", "6": "#94a3b8" },
-  { "3": "#a5b4fc", "4": "#3730a3", "5": "#e0e7ff", "6": "#4f46e5" },
-  { "3": "#f87171", "4": "#991b1b", "5": "#fecaca", "6": "#b91c1c" },
-  { "3": "#fef08a", "4": "#ca8a04", "5": "#fffbeb", "6": "#fbbf24" },
+  { "3": "#e2e8f0", "4": "#475569", "5": "#f8fafc", "6": "#64748b" },
+  { "3": "#c4b5fd", "4": "#5b21b6", "5": "#ede9fe", "6": "#7c3aed" },
+  { "3": "#fb7185", "4": "#9f1239", "5": "#ffe4e6", "6": "#e11d48" },
+  { "3": "#fde047", "4": "#a16207", "5": "#fffbeb", "6": "#eab308" },
 ];
+
+/** \u51a0\u30fb\u9aea\u306e\u91d1\u306e\u8f1d\u304d\uff08\u9ad8\u6bb5\u968e\u3067\u660e\u308b\u304f\uff09 */
+const HERO_CROWN_BY_TIER: Array<Partial<Record<string, string>>> = [
+  { "1": "#b45309" },
+  { "1": "#ca8a04" },
+  { "1": "#d97706" },
+  { "1": "#ea580c" },
+  { "1": "#f59e0b" },
+  { "1": "#fbbf24" },
+  { "1": "#fcd34d" },
+  { "1": "#fde047" },
+  { "1": "#fef08a" },
+  { "1": "#fef9c3" },
+  { "1": "#fffbeb" },
+];
+
+function heroRowsForTier(tierStep: number): string[] {
+  const step = Math.max(0, Math.min(10, tierStep));
+  const rows = [...HERO_ROWS];
+  if (step >= 5) {
+    rows[9] = "...0666660....";
+    rows[10] = "...0666660....";
+  }
+  if (step >= 8) {
+    rows[1] = "....011110....";
+  }
+  if (step >= 10) {
+    rows[2] = "...01111110...";
+    rows[9] = "..066666660..";
+    rows[10] = "..066666660..";
+  } else if (step >= 8) {
+    rows[9] = "...06666660...";
+    rows[10] = "...06666660...";
+  }
+  return rows;
+}
 
 function heroPaletteForTier(tierStep: number): Record<string, string> {
   const step = Math.max(0, Math.min(10, tierStep));
   const sw = HERO_ARMOR_SWATCHES[step];
-  return { ...HERO_PALETTE, ...sw };
+  const crown = HERO_CROWN_BY_TIER[step];
+  return { ...HERO_PALETTE, ...sw, ...crown } as Record<string, string>;
 }
 
 export function PixelHero({ className, scale = 4 }: { className?: string; scale?: number }) {
@@ -132,7 +170,14 @@ export function PixelHeroTiered({
   className?: string;
   scale?: number;
 }) {
-  return <PixelSvg rows={HERO_ROWS} palette={heroPaletteForTier(tierStep)} scale={scale} className={className} />;
+  return (
+    <PixelSvg
+      rows={heroRowsForTier(tierStep)}
+      palette={heroPaletteForTier(tierStep)}
+      scale={scale}
+      className={className}
+    />
+  );
 }
 
 export function PixelBoss({ className, scale = 4 }: { className?: string; scale?: number }) {
