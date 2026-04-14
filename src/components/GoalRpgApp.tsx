@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -426,18 +425,9 @@ export default function GoalRpgApp() {
 
                 <div className="border-t border-white/10 bg-black/20 p-6 md:border-l md:border-t-0 md:p-8">
                   <div className="mb-4 flex flex-wrap items-start gap-3">
-                    <div className="flex shrink-0 gap-2">
-                      <div className="relative flex h-[72px] w-[72px] items-end justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-950/50">
-                        <Image
-                          src={characterTier.portraitSrc}
-                          alt=""
-                          width={72}
-                          height={72}
-                          className="h-full w-full object-cover opacity-90"
-                        />
-                      </div>
-                      <div className="flex h-[72px] w-[72px] shrink-0 items-end justify-center rounded-2xl border border-white/10 bg-slate-950/50 pb-1">
-                        <PixelHeroTiered tierStep={characterTier.tierStep} scale={3} />
+                    <div className="flex shrink-0">
+                      <div className="flex h-[88px] w-[88px] shrink-0 items-end justify-center rounded-2xl border border-white/10 bg-slate-950/50 pb-1">
+                        <PixelHeroTiered tierStep={characterTier.tierStep} scale={4} />
                       </div>
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">

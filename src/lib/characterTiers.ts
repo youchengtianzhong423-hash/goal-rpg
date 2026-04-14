@@ -1,6 +1,5 @@
 /**
  * \u30af\u30a8\u30b9\u30c8\u9054\u6210\u7387\uff080\u2013100\uff09\u306b\u5fdc\u3058\u305f\u6bb5\u968e\u3002
- * Portrait: public/characters/tier-{0|10|...|100}.png
  */
 
 export type CharacterTierView = {
@@ -11,7 +10,6 @@ export type CharacterTierView = {
   equipment: string;
   /** \u8868\u793a\u7528\u79f0\u53f7\uff08\u9b54\u738b\u6483\u9000\u5f8c\u306f\u5225\u540d\u7fa9\uff09 */
   displayTitle: string;
-  portraitSrc: string;
   /** 0\u201310 \u30d4\u30af\u30bb\u30eb\u52c7\u8005\u306e\u8272\u5909\u66f4\u7528 */
   tierStep: number;
 };
@@ -77,7 +75,6 @@ export function getCharacterTier(questProgressPercent: number, goalAchieved: boo
     rank: row.rank,
     equipment: visual.equipment,
     displayTitle,
-    portraitSrc: `/characters/tier-${visualBucket}.png`,
     tierStep: visualBucket / 10,
   };
 }
@@ -87,17 +84,3 @@ export function nextTierBucket(current: number): number | null {
   return current + 10;
 }
 
-/*
- * Portrait file mapping (replace tier-*.png in public/characters anytime):
- * 0%   \u6751\u4eba / villager, unarmed
- * 10%  leather, wood buckler
- * 20%  traveler, iron sword + wood shield
- * 30%  scarf + standard kit
- * 40%  full steel plate
- * 50%  plate + gold trim
- * 60%  gold ornate shield (\u9ec4\u91d1)
- * 70%  cape, regal knight (\u8056\u9a0e\u58eb)
- * 80%  white/platinum (\u4f1d\u8aac / platinum)
- * 90%  crystal sword (\u7adc\u3092\u7834\u304f)
- * 100% white-gold divine robe (\u795e\u306e\u8863)
- */
